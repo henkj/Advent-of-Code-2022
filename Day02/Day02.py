@@ -1,79 +1,68 @@
-def part1(input):
+def part(input):
     with open(input) as f:
         lines = f.readlines()
         lines = [s.strip() for s in lines]
 
-       # A, X ROCK
-       # B, Y PAPER
-       # C, Z SCISSORS
-        myScore = 0
+        myScore = myScore2 = 0
+
         for line in lines:
-            myScore += calcScore(line[2], line[0])
-        print(myScore)
+            op, me = line.split()
+            myScore += calcScore1(me, op)
+            myScore2 += calcScore2(me, op)
+        
+        print("part1: " + str(myScore))
+        print("part2: " + str(myScore2))
 
 
 
-def calcScore(mySign, opponentSign):
+def calcScore1(me, opponent):
     score = 0
-    if mySign == "X":
+    if me == "X":
         score += 1
-        if opponentSign == "A":
+        if opponent == "A":
             score += 3
-        elif opponentSign == "C":
+        elif opponent == "C":
             score += 6
-    if mySign == "Y":
+    if me == "Y":
         score += 2
-        if opponentSign == "A":
+        if opponent == "A":
             score += 6
-        elif opponentSign == "B":
+        elif opponent == "B":
             score += 3  
-    if mySign == "Z":
+    if me == "Z":
         score += 3
-        if opponentSign == "B":
+        if opponent == "B":
             score += 6
-        elif opponentSign == "C":
+        elif opponent == "C":
             score += 3      
     return score   
 
-def part2(input):
-    with open(input) as f:
-        lines = f.readlines()
-        lines = [s.strip() for s in lines]
 
-       # A, X ROCK
-       # B, Y PAPER
-       # C, Z SCISSORS
-        myScore = 0
-        for line in lines:
-            myScore += calcScore2(line[2], line[0])
-        print(myScore)
-
-def calcScore2(mySign, opponentSign):
+def calcScore2(me, opponent):
     score = 0
-    if mySign == "X":
-        if opponentSign == "A":
+    if me == "X":
+        if opponent == "A":
             score += 3
-        elif opponentSign == "B":
+        elif opponent == "B":
             score += 1
         else:
             score += 2
-    if mySign == "Y":
+    if me == "Y":
         score += 3
-        if opponentSign == "A":
+        if opponent == "A":
             score += 1
-        elif opponentSign == "B":
+        elif opponent == "B":
             score += 2
         else:
             score += 3
-    if mySign == "Z":
+    if me == "Z":
         score += 6
-        if opponentSign == "A":
+        if opponent == "A":
             score += 2
-        elif opponentSign == "B":
+        elif opponent == "B":
             score += 3
         else:
             score += 1
     return score   
 
-part1('Day02/input/input.txt')
-part2('Day02/input/input.txt')
+part('Day02/input/input.txt')
