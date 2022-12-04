@@ -13,6 +13,7 @@ def main(input):
                 contains += 1
             if a1 <= b2 and a2 >= b1:
                 overlaps += 1
+        
         print("part1: " + str(contains))
         print("part2: " + str(overlaps))
 
