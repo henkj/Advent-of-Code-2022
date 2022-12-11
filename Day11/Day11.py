@@ -1,6 +1,5 @@
 class Monkey:
-    def __init__(self, monkeyIndex, items, op, val, divTest, trueIndex, falseIndex):
-        self.monkeyIndex = monkeyIndex
+    def __init__(self, items, op, val, divTest, trueIndex, falseIndex):
         self.items = items
         self.op = op
         self.val = val
@@ -44,7 +43,6 @@ def readInput(lines, monkeys, setCommonDivider):
     commonDivider = 1
     i = 0
     while i < len(lines):
-        monkeyIndex = int(lines[i].split()[1].strip(":"))
         items = lines[i+1][len("Starting items: "):].split(", ")
         items = list(map(int, items))
         op, val = lines[i+2][len("Operation: new = old "):].split()
@@ -52,7 +50,7 @@ def readInput(lines, monkeys, setCommonDivider):
         commonDivider *= divTest
         trueIndex = int(lines[i+4][len("If true: throw to monkey "):])
         falseIndex = int(lines[i+5][len("If false: throw to monkey "):])
-        monkeys.append(Monkey(monkeyIndex, items, op, val, divTest, trueIndex, falseIndex))
+        monkeys.append(Monkey(items, op, val, divTest, trueIndex, falseIndex))
         i += 7
     if setCommonDivider: # Only in part 2
         for monkey in monkeys:
