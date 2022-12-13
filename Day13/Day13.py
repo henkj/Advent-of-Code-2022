@@ -3,39 +3,39 @@ def isList(str):
         return True
     return False
 
-def processList(a, b):
-    a = a[1:-1]
-    b = b[1:-1]
+# -1 if left is higher, +1 if right is higher, 0 if neutral
+def processList(left, right):
 
-    aElements = getSubElements(a)
-    bElements = getSubElements(b)
+    leftElements = getSubElements(left[1:-1])
+    rightElements = getSubElements(right[1:-1])
 
-    for i, j in zip(aElements, bElements):
-        if not (isList(i) or isList(j)): # Both value
-            if int(i) > int(j):
+    for l, r in zip(leftElements, rightElements):
+        if not (isList(l) or isList(r)): # Both value
+            if int(l) > int(r):
                 return -1
-            elif int(j) > int(i):
+            elif int(r) > int(l):
                 return 1
-        elif isList(i) and isList(j): # Both lists
-            ret = processList(i, j)
+        elif isList(l) and isList(r): # Both lists
+            ret = processList(l, r)
             if ret != 0:
                 return ret
-        elif isList(j): # j List
-            i = "[" + i + "]"
-            ret = processList(i, j)
+        elif isList(r): # r List
+            l = "[" + l + "]"
+            ret = processList(l, r)
             if ret != 0:
                 return ret
-        elif isList(i): # i List
-            j = "[" + j + "]"
-            ret = processList(i, j)
+        elif isList(l): # l List
+            r = "[" + r + "]"
+            ret = processList(l, r)
             if ret != 0:
                 return ret
 
-    if len(aElements) > len(bElements):
+    if len(leftElements) > len(rightElements):
         return -1
-    elif len(bElements) > len(aElements):
+    elif len(rightElements) > len(leftElements):
         return 1
-    return 0
+    else:
+        return 0
 
 
 def getSubElements(a):
